@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+/* 
+:root是一个伪类，表示文档根元素，所有主流浏览器均支持 :root 选择器，
+除了 IE8 及更早的版本。在:root中声明相当于全局属性，只要当前页面引用了:root segment所在文件，都可以使用var()来引用。
+*/
+:root {
+    --line-border-fill: #3498db;
+    --line-border-empty: #e0e0e0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f6f7fb;
+    font-family: 'Muli', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.progress-container {
+    display: flex;
+    /* 均匀排列每个元素,首个元素放置于起点，末尾元素放置于终点 */
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 100%;
+    width: 350px;
+}
+
+.progress-container::before {
+    content: '';
+    background-color: var(--line-border-fill);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    /* 元素垂直居中 */
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;
+    /* 层叠元素 值越高越靠近用户 */
+    z-index: -1;
+}
+
+.progress {
+    background-color: var(--line-border-fill);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 0%;
+    z-index: -1;
+    /* 过渡效果 */
+    transition: 0.4s ease;
+}
+
+.circle {
+    background-color: #fff;;
+    color: #999;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--line-border-empty);
+    transition: 0.4s ease;
+}
+
+.circle.active {
+    border-color: var(--line-border-fill);
+}
+
+.btn {
+    background-color: var(--line-border-fill);
+    color: #fff;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 8px 30px;
+    margin: 5px;
+    font-size: 14px;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* 焦点伪元素 */
+.btn:focus {
+    /* 轮廓 */
+    outline: 0;
+}
+
+.btn:disabled {
+    background-color: var(--line-border-empty);
+    cursor: not-allowed;
+}
